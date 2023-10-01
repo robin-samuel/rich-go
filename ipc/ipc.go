@@ -3,7 +3,6 @@ package ipc
 import (
 	"bytes"
 	"encoding/binary"
-	"fmt"
 	"net"
 	"os"
 )
@@ -17,7 +16,7 @@ func GetIpcPath() string {
 	if _, err := os.Stat("/run/user/1000/snap.discord"); err == nil {
 		return "/run/user/1000/snap.discord"
 	}
-	
+
 	for _, variablename := range variablesnames {
 		path, exists := os.LookupEnv(variablename)
 
@@ -42,7 +41,7 @@ func Read() string {
 	buf := make([]byte, 512)
 	payloadlength, err := socket.Read(buf)
 	if err != nil {
-		//fmt.Println("Nothing to read")
+		return ""
 	}
 
 	buffer := new(bytes.Buffer)
@@ -54,24 +53,24 @@ func Read() string {
 }
 
 // Send opcode and payload to the unix socket
-func Send(opcode int, payload string) string {
+func Send(opcode int, payload string) (string, error) {
 	buf := new(bytes.Buffer)
 
 	err := binary.Write(buf, binary.LittleEndian, int32(opcode))
 	if err != nil {
-		fmt.Println(err)
+		return "", err
 	}
 
 	err = binary.Write(buf, binary.LittleEndian, int32(len(payload)))
 	if err != nil {
-		fmt.Println(err)
+		return "", err
 	}
 
 	buf.Write([]byte(payload))
 	_, err = socket.Write(buf.Bytes())
 	if err != nil {
-		fmt.Println(err)
+		return "", err
 	}
 
-	return Read()
+	return Read(), nil
 }
