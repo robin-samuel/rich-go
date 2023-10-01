@@ -4,20 +4,22 @@ An implementation of Discord's rich presence in Golang for Linux, macOS and Wind
 
 ## Installation
 
-Install `github.com/hugolgst/rich-go`:
+Install `github.com/robin-samuel/rich-go`:
 
 ```
-$ go get github.com/hugolgst/rich-go
+$ go get github.com/robin-samuel/rich-go
 ```
 
 ## Usage
 
 First of all import rich-go
+
 ```golang
-import "github.com/hugolgst/rich-go/client"
+import "github.com/robin-samuel/rich-go/client"
 ```
 
 then login by sending the first handshake
+
 ```golang
 err := client.Login("DISCORD_APP_ID")
 if err != nil {
@@ -26,6 +28,7 @@ if err != nil {
 ```
 
 and you can set the Rich Presence activity (parameters can be found :
+
 ```golang
 err = client.SetActivity(client.Activity{
 	State:      "Heyy!!!",
@@ -53,7 +56,7 @@ More details in the [example](https://github.com/ananagame/rich-go/blob/master/e
 
 ## Contributing
 
-1. Fork it (https://github.com/hugolgst/rich-go/fork)
+1. Fork it (https://github.com/robin-samuel/rich-go/fork)
 2. Create your feature branch (git checkout -b my-new-feature)
 3. Commit your changes (git commit -am 'Add some feature')
 4. Push to the branch (git push origin my-new-feature)
@@ -61,6 +64,6 @@ More details in the [example](https://github.com/ananagame/rich-go/blob/master/e
 
 ## Contributors
 
-- [hugolgst](https://github.com/hugolgst) - creator, maintainer
+- [hugolgst](https://github.com/robin-samuel) - creator, maintainer
 - [donovansolms](https://github.com/donovansolms) - contributor
 - [heroslender](https://github.com/heroslender) - contributor
